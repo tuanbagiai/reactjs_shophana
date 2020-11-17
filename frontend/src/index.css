@@ -195,6 +195,12 @@ a:hover{
 .button.primary{
   background-color: rgb(230, 163, 19);
 }
+.button.primary.create{
+  
+}
+.button.primary.export:hover{
+   background-color: #16ebeb;
+}
 .button.secondary{
   background-color: #f0f0f0;
 }
@@ -284,11 +290,13 @@ input{
 
 .product-header{
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: flex-end;
 
 }
-
+.product-header-child{
+   justify-content: flex-start;
+}
 .content-margined{
   margin: 1rem;
 }

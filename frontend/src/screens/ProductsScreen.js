@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signin } from '../actions/userActions';
 import { saveProduct, listProducts, deleteProduct } from '../actions/productActions';
-
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';  
 function ProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
@@ -57,11 +57,19 @@ function ProductsScreen(props) {
     dispatch(deleteProduct(product._id));
   }
   return <div className="content content-margined">
-
-    <div className="product-header">
-      <h3>Products</h3>
-      <button className="button primary" onClick={() => openModal({})}>Create Product</button>
+    <div className="header-product">
+      <h3 className="product-header-child">Products</h3>
+      <div className="product-header">
+        <button className="button primary create" onClick={() => openModal({})}>Create Product</button>
+        <ReactHTMLTableToExcel
+          className="button primary export"
+          table="ao"
+          filename="ReportExcel"
+          sheet="Sheet"
+          buttonText="Export excel" />
+      </div>
     </div>
+
     {modalVisible &&
       <div className="form">
         <form onSubmit={submitHandler} >
@@ -136,7 +144,7 @@ function ProductsScreen(props) {
 
     <div className="product-list">
 
-      <table className="table">
+      <table className="table" id="ao">
         <thead>
           <tr>
             <th>ID</th>
@@ -162,7 +170,9 @@ function ProductsScreen(props) {
           </tr>))}
         </tbody>
       </table>
-
+      <div>  
+     
+    </div>  
     </div>
   </div>
 }
