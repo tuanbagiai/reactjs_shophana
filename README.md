@@ -1,1 +1,1 @@
-# reactjs_shophana
+# https://github.com/tuanbagiai/reactjs_shophana/tree/master
