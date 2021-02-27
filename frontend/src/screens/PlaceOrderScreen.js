@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutStep';
 import { createOrder } from '../actions/orderActions';
-function PlaceOrderScreen(props) {
 
+function PlaceOrderScreen(props) {
+ 
   const cart = useSelector(state => state.cart);
   const orderCreate = useSelector(state => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
@@ -22,14 +23,15 @@ function PlaceOrderScreen(props) {
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
 
   const dispatch = useDispatch();
-
   const placeOrderHandler = () => {
-    // create an order
-    dispatch(createOrder({
-        orderItems: cartItems, shipping, payment, itemsPrice, shippingPrice,
-        taxPrice, totalPrice
-      }));
-  }
+    // const photo = document.getElementById('invoid').contentWindow;
+    //    photo.print();
+      // create an order
+      dispatch(createOrder({
+          orderItems: cartItems, shipping, payment, itemsPrice, shippingPrice,
+          taxPrice, totalPrice
+        }));
+    }
   useEffect(() => {
     if (success) {
         props.history.push("/order/" + order._id);
@@ -98,11 +100,13 @@ function PlaceOrderScreen(props) {
                 )
             }
           </ul>
+
         </div>
 
 
+      
       </div>
-      <div className="placeorder-action">
+      <div className="placeorder-action" id="invoid">
         <ul>
           <li>
             <button className="button primary full-width" onClick={placeOrderHandler} >Place Order</button>
@@ -127,11 +131,7 @@ function PlaceOrderScreen(props) {
             <div>${totalPrice}</div>
           </li>
         </ul>
-
-
-
       </div>
-
     </div>
   </div>
 

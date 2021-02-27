@@ -17,6 +17,10 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+
+import ProfileScreen from './screens/ProfileScreen';
+import OrdersScreen from './screens/OrdersScreen';
+// import InvoidPrint from './components/print_invoid/print_invoid';
 function App() {
 
   const userSignin = useSelector(state => state.userSignin);
@@ -38,30 +42,47 @@ function App() {
         </button>
         <Link to="/">HaNa's Shop</Link>
           </div>
+          <marquee width="50%" style={{color:"red", fontSize:20}}> Happy New Year 2021 </marquee>
           <div className="header-links">
-            <a href="cart.html">Cart</a>
+            <Link to='/cart'>Cart</Link>
+            
             {
               userInfo ? <Link to="/profile">{userInfo.name}</Link> :
                 <Link to="/signin">Sign In</Link>
             }
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <a href="#"  >Admin</a>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/orders">Orders</Link>
+                    <Link to="/products">Products</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </header>
         <aside className="sidebar">
           <h3>Shopping Categories</h3>
           <button className="sidebar-close-button" onClick={closeMenu}>x</button>
-          <ul>
+            <ul className="categories">
             <li>
-              <a href="index.html">Pants</a>
+              <Link to="/category/Pants">Pants</Link>
             </li>
 
             <li>
-              <a href="index.html">Shirts</a>
+              <Link to="/category/Shirts">Shirts</Link>
             </li>
 
           </ul>
         </aside>
         <main className="main">
           <div className="content">
+
+          
+            <Route path="/orders" component={OrdersScreen} />
+            <Route path="/profile" component={ProfileScreen} />
             <Route path="/order/:id" component={OrderScreen} />
             <Route path="/products" component={ProductsScreen} />
             <Route path="/shipping" component={ShippingScreen} />
@@ -71,12 +92,15 @@ function App() {
             <Route path="/register" component={RegisterScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
+            <Route path="/category/:id" component={HomeScreen} />
+            
             <Route path="/" exact={true} component={HomeScreen} />
+
           </div>
 
         </main>
         <footer className="footer">
-          Welcome to us UIT's member!
+          Welcome you to Hana!
     </footer>
       </div>
     

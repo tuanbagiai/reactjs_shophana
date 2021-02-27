@@ -24,7 +24,8 @@ const ProductScreen = (props) => {
   return <div>
   
     <div className="back-to-result">
-      <Link className="back-to-home" to="/">Back to home</Link>
+    <Link className="back-to-home" to="/">Back to home</Link>
+
     </div>
     {loading ? <div>Loading...</div> :
       error ? <div>{error} </div> :

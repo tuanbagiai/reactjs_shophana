@@ -5,9 +5,21 @@ import {isAuth, isAdmin} from '../until';
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const products = await Product.find({});
+  const category = req.query.category ? { category: req.query.category } : {};
+  const searchKeyword = req.query.searchKeyword ? {
+    name: {
+      $regex: req.query.searchKeyword,
+      $options: 'i'
+    }
+  } : {};
+  const sortOrder = req.query.sortOrder ?
+    (req.query.sortOrder === 'lowest' ? { price: 1 } : { price: -1 })
+    :
+    { _id: -1 };
+  const products = await Product.find({ ...category, ...searchKeyword }).sort(sortOrder);
   res.send(products);
 });
+
 router.get("/:id", async (req, res) => {
   const product = await Product.findOne({ _id: req.params.id });
   if (product) {
