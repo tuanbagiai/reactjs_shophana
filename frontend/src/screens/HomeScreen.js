@@ -5,15 +5,16 @@ import { useSelector, useDispatch } from 'react-redux';
     const HomeScreen = (props) => {
       const [searchKeyword, setSearchKeyword] = useState('');
       const [sortOrder, setSortOrder] = useState('');
-      const category = props.match.params.id ? props.match.params.id : '';
+      const category = props.match.params.id ? props.match.params.id: '';
+   
       const productList = useSelector(state => state.productList);
       const { products, loading, error } = productList;
       const dispatch = useDispatch();
 
       useEffect(() => {
         dispatch(listProducts(category));
-        return () => {
-        };
+        // return () => {
+        // };
       }, [category]);
 
       const submitHandler = (e) => {
@@ -24,6 +25,7 @@ import { useSelector, useDispatch } from 'react-redux';
         setSortOrder(e.target.value);
         dispatch(listProducts(category, searchKeyword, sortOrder))
       }
+      
       return <>
       {category &&
         <h2>{category}</h2>}

@@ -79,5 +79,20 @@ router.post("/", isAuth, isAdmin, async (req, res) => {
   return res.status(500).send({ message: ' Error in Creating Product.' });
 })
 
+router.get("/category", isAuth, isAdmin, async () => {
+  const category = req.query.category ? { category: req.query.category } : {};
+  const searchKeyword = req.query.searchKeyword ? {
+    name: {
+      $regex: req.query.searchKeyword,
+      $options: 'i'
+    }
+  } : {};
+  const sortOrder = req.query.sortOrder ?
+    (req.query.sortOrder === 'lowest' ? { price: 1 } : { price: -1 })
+    :
+    { _id: -1 };
+  const products = await Product.find({ ...category, ...searchKeyword }).sort(sortOrder);
+  res.send(products);
 
+})
 export default router; 

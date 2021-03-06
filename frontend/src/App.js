@@ -20,12 +20,16 @@ import OrderScreen from './screens/OrderScreen';
 
 import ProfileScreen from './screens/ProfileScreen';
 import OrdersScreen from './screens/OrdersScreen';
+import {listProducts} from '../src/actions/productActions';
+import React, {useState, useEffect} from 'react';
+import { useDispatch} from 'react-redux';
 // import InvoidPrint from './components/print_invoid/print_invoid';
-function App() {
-
+function App(props) {
+  const [category, setCategory] = useState('');
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
 
+  
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open");
   }
@@ -42,7 +46,7 @@ function App() {
         </button>
         <Link to="/">HaNa's Shop</Link>
           </div>
-          <marquee width="50%" style={{color:"red", fontSize:20}}> Happy New Year 2021 </marquee>
+          <marquee width="50%" style={{color:"red", fontSize:20}}> Welcome you to Hana!</marquee>
           <div className="header-links">
             <Link to='/cart'>Cart</Link>
             
@@ -68,11 +72,11 @@ function App() {
           <button className="sidebar-close-button" onClick={closeMenu}>x</button>
             <ul className="categories">
             <li>
-              <Link to="/category/Pants">Pants</Link>
+              <Link to="/category/pant"  >Pants</Link>
             </li>
 
             <li>
-              <Link to="/category/Shirts">Shirts</Link>
+              <Link to="/category/shirt" >Shirts</Link>
             </li>
 
           </ul>
